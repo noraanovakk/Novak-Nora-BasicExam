@@ -79,11 +79,17 @@ function filterCharacter(characters) {
   console.log(search);
   console.log(characters.length);
   for (var i = 0; i < characters.length; i++) {
+    var house = '';
+    if (characters[i].house) {
+      house = `<img src="/assets/houses/${characters[i].house}.png" alt="house"></img>`;
+    } else {
+      house = '';
+    }
     table2 =
     `
     <img src="${characters[i].picture}"></img>
     <p>${characters[i].name}</p>
-    <img src="/assets/houses/${characters[i].house}.png" alt="house">
+    <p>${house}</p>
     <p>${characters[i].bio}</p>
     `;
     if (characters[i].name === search) {
