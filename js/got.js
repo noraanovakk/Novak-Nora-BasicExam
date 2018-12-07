@@ -16,6 +16,7 @@ function successGetGameOfThronesCharacterDatas(xhttp) {
   gotCharacters(userDatas);
   var aliveCharacters = gotCharacters(userDatas);
   gotSort(aliveCharacters);
+  gotPicturesAndNames(aliveCharacters);
 }
 
 getGameOfThronesCharacterDatas(
@@ -46,5 +47,20 @@ function gotSort(characters) {
   console.log(characters);
   return characters;
 }
+// add pictures and names
+function gotPicturesAndNames(characters) {
+  var table = '';
+  for (var i = 0; i < characters.length; i++) {
+    table += `
+          <div>
+            <img src="${characters[i].portrait}">
+            <p>${characters[i].name}</p>
+          </div>
+  `;
+  }
+  document.querySelector('#body_main_div').innerHTML = table;
+}
+
+// add search
 
 
