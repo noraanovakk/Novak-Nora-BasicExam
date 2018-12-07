@@ -19,7 +19,7 @@ function successGetGameOfThronesCharacterDatas(xhttp) {
   gotPicturesAndNames(aliveCharacters);
   // getCharacter(aliveCharacters);
   gotSearch(aliveCharacters);
-  filterCharacter(aliveCharacters, aliveCharacters.length);
+ // filterCharacter(aliveCharacters);
 }
 
 getGameOfThronesCharacterDatas(
@@ -67,31 +67,38 @@ function gotPicturesAndNames(characters) {
 
 // add search
 function gotSearch(characters) {
-  document.querySelector('#aside__inputButton').addEventListener('click', function fc() { filterCharacter(characters)} );
+  // document.querySelector('#aside__inputButton').addEventListener("click", filterCharacter(characters));
+  document.querySelector('#aside__inputButton').addEventListener("click", function(){ filterCharacter(characters);});
 }
 
-function filterCharacter(characters, charactersLength) {
+function filterCharacter(characters) {
   var info = document.querySelector('#aside__div2');
   var table2 = '';
   var search = document.querySelector('#aside__inputText').value;
-  for (var i = 0; i < charactersLength; i++) {
-    table2 +=
+  // info.innerHTML = search;
+  console.log(search);
+  console.log(characters.length);
+  for (var i = 0; i < characters.length; i++) {
+    table2 =
     `
-    <img src="${characters[i].picture}">
+    <img src="${characters[i].picture}"></img>
     <p>${characters[i].name}</p>
-    <img src="${characters[i].house}.png" alt="house">
+    <img src="/assets/houses/${characters[i].house}.png" alt="house">
     <p>${characters[i].bio}</p>
     `;
     if (characters[i].name === search) {
       info.innerHTML = table2;
+      // info.innerHTML = "megtaláltam baszkikám";
+      console.log(i);
+      break;
       // info.innerHTML = getCharacter(characters[i]);
-    } else {
-      info.innerHTML = 'Nincs ilyen ';
+    }
+     else {
+      info.innerHTML = 'mizu ';
     }
   }
-  return;
 }
-
+// 
 // function getCharacter(characters) {
 //   for (var i = 0; i < characters.length; i++) {
 //     var table2 =
@@ -105,3 +112,30 @@ function filterCharacter(characters, charactersLength) {
 //   }
 // }
 
+// function filterCharacter(characters) {
+//   var info = document.querySelector('#aside__div2');
+//   var table2 = '';
+//   var search = document.querySelector('#aside__inputText').value;
+
+//   var found = false;
+//   var i = -1;
+//   while(!found){
+//     i+=1;
+//     if(characters[i].name === search){
+//       found = true;
+//     }
+//   }
+//   if(found){
+//   table2 =
+//     `
+    
+//     <p>${characters[i].name}</p>
+    
+//     <p>${characters[i].bio}</p>
+//     `;
+//   info.innerHTML = table2;
+//   } else {
+//       info.innerHTML = 'mizu ';
+//     }
+//   }
+// }
