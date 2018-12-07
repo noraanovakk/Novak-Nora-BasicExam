@@ -13,12 +13,13 @@ function successGetGameOfThronesCharacterDatas(xhttp) {
   // Nem szabad globálisba kitenni a userDatas-t!
   var userDatas = JSON.parse(xhttp.responseText);
   // Innen hívhatod meg a többi függvényed
-  gotSearch();
   gotCharacters(userDatas);
   var aliveCharacters = gotCharacters(userDatas);
   gotSort(aliveCharacters);
   gotPicturesAndNames(aliveCharacters);
-  getCharacter(aliveCharacters);
+  // getCharacter(aliveCharacters);
+  gotSearch(aliveCharacters);
+  filterCharacter(aliveCharacters, aliveCharacters.length);
 }
 
 getGameOfThronesCharacterDatas(
@@ -69,31 +70,38 @@ function gotSearch(characters) {
   document.querySelector('#aside__inputButton').addEventListener('click', function fc() { filterCharacter(characters)} );
 }
 
-function filterCharacter(characters) {
+function filterCharacter(characters, charactersLength) {
   var info = document.querySelector('#aside__div2');
   var table2 = '';
   var search = document.querySelector('#aside__inputText').value;
-  for (var i = 0; i < characters.length; i++) {
+  for (var i = 0; i < charactersLength; i++) {
+    table2 +=
+    `
+    <img src="${characters[i].picture}">
+    <p>${characters[i].name}</p>
+    <img src="${characters[i].house}.png" alt="house">
+    <p>${characters[i].bio}</p>
+    `;
     if (characters[i].name === search) {
-      table2 +=
-      `
-      <img src="${characters[i].picture}">
-      <p>${characters[i].name}</p>
-      <img src="${characters[i].house}.png" alt="house">
-      <p>${characters[i].bio}</p>
-      `;
       info.innerHTML = table2;
-      return;
+      // info.innerHTML = getCharacter(characters[i]);
+    } else {
+      info.innerHTML = 'Nincs ilyen ';
     }
   }
-  info.innerHTML = 'Nincs ilyen ';
+  return;
 }
 
-function getCharacter(characters) {
-  filterCharacter(characters);
-  var search = document.querySelector('#aside__inputText').value;
-  characters.filter(function src(k) {
-    return k.toLowerCase().indexOf(search.value) > -1;
-  });
-}
+// function getCharacter(characters) {
+//   for (var i = 0; i < characters.length; i++) {
+//     var table2 =
+//     `
+//     <img src="${characters[i].picture}">
+//     <p>${characters[i].name}</p>
+//     <img src="${characters[i].house}.png" alt="house">
+//     <p>${characters[i].bio}</p>
+//     `;
+//     return table2;
+//   }
+// }
 
