@@ -13,6 +13,9 @@ function successGetGameOfThronesCharacterDatas(xhttp) {
   // Nem szabad globálisba kitenni a userDatas-t!
   var userDatas = JSON.parse(xhttp.responseText);
   // Innen hívhatod meg a többi függvényed
+  gotCharacters(userDatas);
+  var aliveCharacters = gotCharacters(userDatas);
+  gotSort(aliveCharacters);
 }
 
 getGameOfThronesCharacterDatas(
@@ -22,3 +25,26 @@ getGameOfThronesCharacterDatas(
 
 // Live servert használd mindig!!!!!
 /* IDE ÍRD A FÜGGVÉNYEKET!!!!!! NE EBBE AZ EGY SORBA HANEM INNEN LEFELÉ! */
+
+function gotCharacters(characters) {
+  var alive = [];
+  for ( var i = 0; i < characters.length; i++) {
+    if (!characters[i].dead) {
+      alive.push(characters[i]);
+    }
+  }
+// console.log(alive);
+  return alive;
+}
+
+function gotSort(characters) {
+  characters.sort(function sortedCharacter(first, second) {
+    if (first.name > second.name) {
+      return 1;
+    } return -1;
+  });
+  console.log(characters);
+  return characters;
+}
+
+
