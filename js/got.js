@@ -13,10 +13,12 @@ function successGetGameOfThronesCharacterDatas(xhttp) {
   // Nem szabad globálisba kitenni a userDatas-t!
   var userDatas = JSON.parse(xhttp.responseText);
   // Innen hívhatod meg a többi függvényed
+  gotSearch();
   gotCharacters(userDatas);
   var aliveCharacters = gotCharacters(userDatas);
   gotSort(aliveCharacters);
   gotPicturesAndNames(aliveCharacters);
+  getCharacter(aliveCharacters);
 }
 
 getGameOfThronesCharacterDatas(
@@ -47,20 +49,51 @@ function gotSort(characters) {
   console.log(characters);
   return characters;
 }
+
 // add pictures and names
 function gotPicturesAndNames(characters) {
   var table = '';
   for (var i = 0; i < characters.length; i++) {
     table += `
-          <div>
+          <div class="main__div__div">
             <img src="${characters[i].portrait}">
             <p>${characters[i].name}</p>
           </div>
   `;
   }
-  document.querySelector('#body_main_div').innerHTML = table;
+  document.querySelector('#main__div').innerHTML = table;
 }
 
 // add search
+function gotSearch(characters) {
+  document.querySelector('#aside__inputButton').addEventListener('click', function fc() { filterCharacter(characters)} );
+}
 
+function filterCharacter(characters) {
+  var info = document.querySelector('#aside__div2');
+  var table2 = '';
+  var search = document.querySelector('#aside__inputText').value;
+  for (var i = 0; i < characters.length; i++) {
+    if (characters[i].name === search) {
+      table2 +=
+      `
+      <img src="${characters[i].picture}">
+      <p>${characters[i].name}</p>
+      <img src="${characters[i].house}.png" alt="house">
+      <p>${characters[i].bio}</p>
+      `;
+      info.innerHTML = table2;
+      return;
+    }
+  }
+  info.innerHTML = 'Nincs ilyen ';
+}
+
+function getCharacter(characters) {
+  filterCharacter(characters);
+  var search = document.querySelector('#aside__inputText').value;
+  characters.filter(function src(k) {
+    return k.toLowerCase().indexOf(search.value) > -1;
+  });
+}
 

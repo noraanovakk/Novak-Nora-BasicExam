@@ -1,0 +1,26 @@
+body{
+  background-image: url("../assets/site/mapblue.jpg");
+  width: 100%;
+  position: relative;
+}
+#main__div{
+  width: 80%;
+  position: absolute;
+  float: left;
+
+}
+.main__div__div{
+  float: left;
+  position: relative;
+}
+#aside__div{
+  position: absolute;
+  width: 20%;
+  background-color: yellow;
+  right: 0;
+  height: 1000px;
+}
+#aside__inputText, #aside__inputButton{
+  position: absolute;
+  bottom: 0;
+}
