@@ -109,10 +109,10 @@ function filterCharacter(characters) {
     }
     table2 =
     `
-    <img src="${characters[i].picture}"></img>
-    <p>${characters[i].name}</p>
-    <p>${house}</p>
-    <p>${characters[i].bio}</p>
+    <img id="aside__img" src="${characters[i].picture}"></img>
+    <p id="aside__name">${characters[i].name}</p>
+    <p id="aside__house">${house}</p>
+    <p id="aside__bio">${characters[i].bio}</p>
     `;
     if (characters[i].name === search) {
       info.innerHTML = table2;

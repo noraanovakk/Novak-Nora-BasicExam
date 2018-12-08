@@ -1,26 +1,94 @@
 body{
   background-image: url("../assets/site/mapblue.jpg");
-  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+#container{
   position: relative;
 }
 #main__div{
   width: 80%;
   position: absolute;
-  float: left;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 
 }
 .main__div__div{
-  float: left;
   position: relative;
+  margin: .5rem;
+}
+.main__div__div img, p{
+  width: 7.5rem;
+  font-size: 1.3rem;
+  text-align: center;
 }
 #aside__div{
   position: absolute;
   width: 20%;
-  background-color: yellow;
+  background-color: #394743;
   right: 0;
-  height: 1000px;
+  top: 0;
+  bottom: 0;
+  height: 100rem;
+  margin-left: 3rem;
+  color: white;
+
 }
 #aside__inputText, #aside__inputButton{
   position: absolute;
   bottom: 0;
 }
+#aside__inputText{
+  width: 70%;
+  right: 0;
+  height: 3rem;
+  opacity: .2;
+}
+#aside__inputButton{
+  width: 29%;
+  height: 3.35rem;
+  background-color: #394743;
+  border: 1px solid #c6c9ce;
+}
+#aside__div2{
+  position: relative;
+}
+#aside__img{
+  position: absolute;
+  width: 100%;
+  margin-top: 2rem;
+  height: 
+}
+#aside__name{
+position: absolute;
+top: 15rem;
+text-align: left;
+left: 1rem;
+width: 100%;
+}
+#aside__house{
+  position: absolute;
+  width: 100%;
+  top: 15rem;
+  text-align: right;
+  right: 1rem;
+}
+#aside__bio{
+  position: absolute;
+  top: 19rem;
+  width: 90%;
+  text-align: justify;
+  margin: 1rem;
+  
+
+}
+#aside__div__p{
+  margin-top: 2rem;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+
