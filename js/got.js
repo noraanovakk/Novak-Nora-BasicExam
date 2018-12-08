@@ -19,7 +19,8 @@ function successGetGameOfThronesCharacterDatas(xhttp) {
   gotPicturesAndNames(aliveCharacters);
   // getCharacter(aliveCharacters);
   gotSearch(aliveCharacters);
- // filterCharacter(aliveCharacters);
+  // filterCharacter(aliveCharacters);
+  gotSearchName(aliveCharacters);
 }
 
 getGameOfThronesCharacterDatas(
@@ -58,7 +59,7 @@ function gotPicturesAndNames(characters) {
     table += `
           <div class="main__div__div">
             <img src="${characters[i].portrait}">
-            <p>${characters[i].name}</p>
+            <p id="main__p">${characters[i].name}</p>
           </div>
   `;
   }
@@ -67,15 +68,36 @@ function gotPicturesAndNames(characters) {
 
 // add search
 function gotSearch(characters) {
-  // document.querySelector('#aside__inputButton').addEventListener("click", filterCharacter(characters));
-  document.querySelector('#aside__inputButton').addEventListener("click", function(){ filterCharacter(characters);});
+  document.querySelector('#aside__inputButton').addEventListener('click', function () {filterCharacter( characters);});
 }
+
+// create infoBox
+// function infoBox(characters) {
+//   var table2 = '';
+//   for (var i = 0; i < characters.length; i++) {
+//     var house = '';
+//     if (characters[i].house) {
+//       house = `<img src="/assets/houses/${characters[i].house}.png" alt="house"></img>`;
+//     } else {
+//       house = '';
+//     }
+//     table2 =
+//     `
+//     <img src="${characters[i].picture}"></img>
+//     <p>${characters[i].name}</p>
+//     <p>${house}</p>
+//     <p>${characters[i].bio}</p>
+//     `;
+//     return table2[i];
+//   }
+// }
 
 function filterCharacter(characters) {
   var info = document.querySelector('#aside__div2');
   var table2 = '';
   var search = document.querySelector('#aside__inputText').value;
-  // info.innerHTML = search;
+  var name = document.querySelector('#main__p').value;
+  console.log(name);
   console.log(search);
   console.log(characters.length);
   for (var i = 0; i < characters.length; i++) {
@@ -94,17 +116,20 @@ function filterCharacter(characters) {
     `;
     if (characters[i].name === search) {
       info.innerHTML = table2;
-      // info.innerHTML = "megtaláltam baszkikám";
       console.log(i);
       break;
-      // info.innerHTML = getCharacter(characters[i]);
-    }
-     else {
-      info.innerHTML = 'mizu ';
+    } else if (characters[i].name === name) {
+      info.innerHTML = table2;
+      console.log(name);
+      break;
+    } else {
+      info.innerHTML = 'Character not found';
     }
   }
 }
-// 
+
+
+
 // function getCharacter(characters) {
 //   for (var i = 0; i < characters.length; i++) {
 //     var table2 =
@@ -134,9 +159,7 @@ function filterCharacter(characters) {
 //   if(found){
 //   table2 =
 //     `
-    
 //     <p>${characters[i].name}</p>
-    
 //     <p>${characters[i].bio}</p>
 //     `;
 //   info.innerHTML = table2;
@@ -145,3 +168,8 @@ function filterCharacter(characters) {
 //     }
 //   }
 // }
+
+// add search to p
+function gotSearchName(characters) {
+  document.querySelector('#main__p').addEventListener('click', function () {filterCharacter(characters);});
+}
