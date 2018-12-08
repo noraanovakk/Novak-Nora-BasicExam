@@ -20,7 +20,8 @@ function successGetGameOfThronesCharacterDatas(xhttp) {
   // getCharacter(aliveCharacters);
   gotSearch(aliveCharacters);
   // filterCharacter(aliveCharacters);
-  gotSearchName(aliveCharacters);
+  // gotSearchName(aliveCharacters);
+  getContainerElement();
 }
 
 getGameOfThronesCharacterDatas(
@@ -38,7 +39,6 @@ function gotCharacters(characters) {
       alive.push(characters[i]);
     }
   }
-// console.log(alive);
   return alive;
 }
 
@@ -52,7 +52,7 @@ function gotSort(characters) {
   return characters;
 }
 
-// add pictures and names
+// add pictures and names to main
 function gotPicturesAndNames(characters) {
   var table = '';
   for (var i = 0; i < characters.length; i++) {
@@ -71,33 +71,12 @@ function gotSearch(characters) {
   document.querySelector('#aside__inputButton').addEventListener('click', function () {filterCharacter( characters);});
 }
 
-// create infoBox
-// function infoBox(characters) {
-//   var table2 = '';
-//   for (var i = 0; i < characters.length; i++) {
-//     var house = '';
-//     if (characters[i].house) {
-//       house = `<img src="/assets/houses/${characters[i].house}.png" alt="house"></img>`;
-//     } else {
-//       house = '';
-//     }
-//     table2 =
-//     `
-//     <img src="${characters[i].picture}"></img>
-//     <p>${characters[i].name}</p>
-//     <p>${house}</p>
-//     <p>${characters[i].bio}</p>
-//     `;
-//     return table2[i];
-//   }
-// }
 
 function filterCharacter(characters) {
   var info = document.querySelector('#aside__div2');
   var table2 = '';
-  var search = document.querySelector('#aside__inputText').value;
-  var name = document.querySelector('#main__p').value;
-  console.log(name);
+  // var search = document.querySelector('#aside__inputText').value;
+  var search = getContainerElement();
   console.log(search);
   console.log(characters.length);
   for (var i = 0; i < characters.length; i++) {
@@ -118,58 +97,33 @@ function filterCharacter(characters) {
       info.innerHTML = table2;
       console.log(i);
       break;
-    } else if (characters[i].name === name) {
-      info.innerHTML = table2;
-      console.log(name);
-      break;
     } else {
       info.innerHTML = 'Character not found';
     }
   }
 }
 
-
-
-// function getCharacter(characters) {
-//   for (var i = 0; i < characters.length; i++) {
-//     var table2 =
-//     `
-//     <img src="${characters[i].picture}">
-//     <p>${characters[i].name}</p>
-//     <img src="${characters[i].house}.png" alt="house">
-//     <p>${characters[i].bio}</p>
-//     `;
-//     return table2;
-//   }
-// }
-
-// function filterCharacter(characters) {
-//   var info = document.querySelector('#aside__div2');
-//   var table2 = '';
-//   var search = document.querySelector('#aside__inputText').value;
-
-//   var found = false;
-//   var i = -1;
-//   while(!found){
-//     i+=1;
-//     if(characters[i].name === search){
-//       found = true;
-//     }
-//   }
-//   if(found){
-//   table2 =
-//     `
-//     <p>${characters[i].name}</p>
-//     <p>${characters[i].bio}</p>
-//     `;
-//   info.innerHTML = table2;
-//   } else {
-//       info.innerHTML = 'mizu ';
-//     }
-//   }
-// }
-
-// add search to p
-function gotSearchName(characters) {
-  document.querySelector('#main__p').addEventListener('click', function () {filterCharacter(characters);});
+// give back name when clicked
+function printElementContent(index) {
+  var container = document.querySelector('#main__div');
+  var personalContainer = container.children;
+  console.log(personalContainer[index].children[1].textContent);
+  return personalContainer[index].children[1].textContent;
 }
+
+// 
+function addCustomListenerForParagraph(element, index) {
+  element.addEventListener('click', function() { printElementContent(index); });
+}
+
+// 
+function getContainerElement() {
+  var container = document.querySelector('#main__div');
+  var personalContainer = container.children;
+  for (var i = 0; i < personalContainer.length; i++) {
+    console.log(personalContainer[i].children[1]);
+    var paragraph = personalContainer[i].children[1];
+    addCustomListenerForParagraph(paragraph, i);
+  }
+}
+
