@@ -21,7 +21,7 @@ function successGetGameOfThronesCharacterDatas(xhttp) {
   gotSearch(aliveCharacters);
   // filterCharacter(aliveCharacters);
   // gotSearchName(aliveCharacters);
-  getContainerElement();
+  getContainerElement(aliveCharacters);
 }
 
 getGameOfThronesCharacterDatas(
@@ -104,26 +104,42 @@ function filterCharacter(characters) {
 }
 
 // give back name when clicked
-function printElementContent(index) {
+function printElementContent(characters, index) {
   var container = document.querySelector('#main__div');
   var personalContainer = container.children;
   console.log(personalContainer[index].children[1].textContent);
-  return personalContainer[index].children[1].textContent;
+  // return personalContainer[index].children[1].textContent;
+  var info = document.querySelector('#aside__div2');
+  var table2 = '';
+  var house = '';
+  if (characters[index].house) {
+    house = `<img src="/assets/houses/${characters[index].house}.png" alt="house"></img>`;
+  } else {
+    house = '';
+  }
+  table2 =
+  `
+  <img id="aside__img" src="${characters[index].picture}"></img>
+  <p id="aside__name">${characters[index].name}</p>
+  <p id="aside__house">${house}</p>
+  <p id="aside__bio">${characters[index].bio}</p>
+  `;
+  info.innerHTML = table2;
+}
+
+// sense click and forwards to printElementContent
+function addCustomListenerForParagraph(element, characters, index) {
+  element.addEventListener('click', function() { printElementContent(characters, index); });
 }
 
 // 
-function addCustomListenerForParagraph(element, index) {
-  element.addEventListener('click', function() { printElementContent(index); });
-}
-
-// 
-function getContainerElement() {
+function getContainerElement(characters) {
   var container = document.querySelector('#main__div');
   var personalContainer = container.children;
   for (var i = 0; i < personalContainer.length; i++) {
     console.log(personalContainer[i].children[1]);
     var paragraph = personalContainer[i].children[1];
-    addCustomListenerForParagraph(paragraph, i);
+    addCustomListenerForParagraph(paragraph, characters, i);
   }
 }
 
