@@ -103,12 +103,24 @@ function filterCharacter(characters) {
   }
 }
 
-// give back name when clicked
-function printElementContent(characters, index) {
+// assign p to listener
+function getContainerElement(characters) {
   var container = document.querySelector('#main__div');
   var personalContainer = container.children;
-  console.log(personalContainer[index].children[1].textContent);
-  // return personalContainer[index].children[1].textContent;
+  for (var i = 0; i < personalContainer.length; i++) {
+    // console.log(personalContainer[i].children[1]);
+    var paragraph = personalContainer[i].children[1];
+    addCustomListenerForParagraph(paragraph, characters, i);
+  }
+}
+
+// sense click and forwards to printElementContent
+function addCustomListenerForParagraph(element, characters, index) {
+  element.addEventListener('click', function() { printElementContent(characters, index); });
+}
+
+// give back name when clicked
+function printElementContent(characters, index) {
   var info = document.querySelector('#aside__div2');
   var table2 = '';
   var house = '';
@@ -126,20 +138,3 @@ function printElementContent(characters, index) {
   `;
   info.innerHTML = table2;
 }
-
-// sense click and forwards to printElementContent
-function addCustomListenerForParagraph(element, characters, index) {
-  element.addEventListener('click', function() { printElementContent(characters, index); });
-}
-
-// 
-function getContainerElement(characters) {
-  var container = document.querySelector('#main__div');
-  var personalContainer = container.children;
-  for (var i = 0; i < personalContainer.length; i++) {
-    console.log(personalContainer[i].children[1]);
-    var paragraph = personalContainer[i].children[1];
-    addCustomListenerForParagraph(paragraph, characters, i);
-  }
-}
-
