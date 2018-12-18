@@ -12,6 +12,7 @@ function getGameOfThronesCharacterDatas(url, callbackFunc) {
 function successGetGameOfThronesCharacterDatas(xhttp) {
   // Nem szabad globálisba kitenni a userDatas-t!
   var userDatas = JSON.parse(xhttp.responseText);
+  
   // Innen hívhatod meg a többi függvényed
   gotCharacters(userDatas);
   var aliveCharacters = gotCharacters(userDatas);
@@ -75,8 +76,8 @@ function gotSearch(characters) {
 function filterCharacter(characters) {
   var info = document.querySelector('#aside__div2');
   var table2 = '';
-  // var search = document.querySelector('#aside__inputText').value;
-  var search = getContainerElement();
+  var search = document.querySelector('#aside__inputText').value;
+ // var search = getContainerElement();
   console.log(search);
   console.log(characters.length);
   for (var i = 0; i < characters.length; i++) {
@@ -103,7 +104,7 @@ function filterCharacter(characters) {
   }
 }
 
-// assign p to listener
+// assign listener to p
 function getContainerElement(characters) {
   var container = document.querySelector('#main__div');
   var personalContainer = container.children;
@@ -114,12 +115,12 @@ function getContainerElement(characters) {
   }
 }
 
-// sense click and forwards to printElementContent
+// sense click and forwards to printElementContent, 
 function addCustomListenerForParagraph(element, characters, index) {
   element.addEventListener('click', function() { printElementContent(characters, index); });
 }
 
-// give back name when clicked
+// give back name when clicked, name is not necessary, because index is set for every eventlistener already
 function printElementContent(characters, index) {
   var info = document.querySelector('#aside__div2');
   var table2 = '';
